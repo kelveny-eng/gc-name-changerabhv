@@ -13,7 +13,7 @@ const names = require("./names.json");
     console.log("⏳ Login manually required…");
     await page.waitForTimeout(25000); 
 
-    await page.goto("https://www.instagram.com/direct/t/YOUR_GC_ID/");
+    await page.goto("https://www.instagram.com/direct/t/1176649277224222/");
 
     for (const newName of names) {
         console.log("Changing name to:", newName);
