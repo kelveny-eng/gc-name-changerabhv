@@ -20,25 +20,26 @@ const names = require("./names.json");
   });
 
   await page.goto("https://www.instagram.com/");
-  await page.waitFor(5000);
+  await new Promise(r => setTimeout(r, 6000));
 
-  // GC Page
+  // Go to GC
   await page.goto("https://www.instagram.com/direct/t/1176649277224222/");
-  await page.waitFor(7000);
+  await new Promise(r => setTimeout(r, 7000));
 
   for (const newName of names) {
     console.log("Changing name to:", newName);
 
-    const input = "input[placeholder='Group Name']";
-    await page.waitForSelector(input);
-    await page.click(input, { clickCount: 3 });
-    await page.type(input, newName);
+    const inputSelector = "input[placeholder='Group Name']";
+    const saveBtnSelector = "button[type='submit']";
 
-    const saveBtn = "button[type='submit']";
-    await page.waitForSelector(saveBtn);
-    await page.click(saveBtn);
+    await page.waitForSelector(inputSelector);
+    await page.click(inputSelector, { clickCount: 3 });
+    await page.type(inputSelector, newName);
 
-    await page.waitFor(4000); // old compatible delay
+    await page.waitForSelector(saveBtnSelector);
+    await page.click(saveBtnSelector);
+
+    await new Promise(r => setTimeout(r, 4000)); // delay between changes
   }
 
   console.log("✔ Name rotation completed!");
