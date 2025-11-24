@@ -1,13 +1,18 @@
 
 const puppeteer = require("puppeteer");
 const names = require("./names.json");
-
+const SESSIONID = "17843691127146670";
 (async () => {
     const browser = await puppeteer.launch({
         headless: true
     });
 
     const page = await browser.newPage();
+    await page.setCookie({
+    name: "sessionid",
+    value: SESSIONID,
+    domain: ".instagram.com"
+});
     await page.goto("https://www.instagram.com/accounts/login/");
 
     console.log("⏳ Login manually required…");
